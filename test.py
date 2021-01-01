@@ -1,11 +1,6 @@
 import requests
 
-BASE = "http://127.0.0.1:5000/"
+BASE = "http://192.168.0.48:5000/"
 
-response = requests.delete(BASE + "video/3")
-print(response)
-
-input()
-
-response = requests.get(BASE + "video/3")
+response = requests.get(BASE + "video/1")
 print(response.json())
