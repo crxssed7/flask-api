@@ -81,7 +81,16 @@ class Video(Resource):
 
         return '', 204
 
+class VideoSearch(Resource):
+    @marshal_with(resource_fields)
+    def get(self, query):
+        result = VideoModel.query.filter(VideoModel.name.like('%' + query + '%')).all()
+        if not result:
+            abort(404, message="No video found with that query")
+        return result
+
 api.add_resource(Video, "/video/<int:video_id>")
+api.add_resource(VideoSearch, "/video/search/<string:query>")
 
 if __name__ == "__main__":
     app.run(host='192.168.0.48')
